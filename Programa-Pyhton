@@ -1,0 +1,89 @@
+def cadastrarPeca(codigo):
+
+    print('Código da Peça: 00{}'.format(codigo))
+    nome = input('Digite o nome da peça: ')
+    fabricante = input('Digite o fabricante da peça: ')
+    valor = input('Digite o valor da peça: ')
+    dicionarioPeca = {'codigo': codigo, 'nome': nome, 'fabricante': fabricante, 'valor': valor}
+    listaPecas.append(dicionarioPeca.copy())
+
+    return codigo
+
+def consultaPeca():
+    while True:
+        print('\t1) Consultar Todas as Peças')
+        print('\t2) Consulta Peças por Código')
+        print('\t3) Consulta Peças por Fabricante')
+        print('\t4) Retornar')
+        consulta = int(input('Digite a opção desejada: '))
+        try:
+            if consulta == 1:
+                for e in listaPecas:
+                    print('-' * 20)
+                    for i, j in e.items():
+                        print('{} : {}'.format(i, j))
+                continue
+            elif consulta == 2:
+                codigoPeca = int(input('\nDigite o código da peça: '))
+                consulta_cod = listaPecas[codigoPeca - 1]
+                print('-' * 20)
+                for i, j in consulta_cod.items():
+                    print('{} : {}'.format(i, j))
+                print('-' * 20)
+                continue
+            elif consulta == 3:
+                fabricantePeca = input('\nDgite o fabricante da peça: ')
+                print('-' * 20)
+                for e in listaPecas:
+                    if (e['fabricante'] == fabricantePeca):
+                        for i, j in e.items():
+                            print('{} : {}'.format(i, j))
+                        print('-' * 20)
+                continue
+            elif consulta == 4:
+                return
+            else:
+                print('Opção inválida. Selecione uma das opções abaixo')
+                continue
+        except ValueError:
+            print('Opção inválida. Selecione uma das opções abaixo')
+            continue
+
+def removerPeca():
+    peca = int(input('Qual código da peça que deseja remover? '))
+    for i in listaPecas:
+        if(i['codigo'] == peca):
+            listaPecas.remove(i)
+            print('Peça removida com sucesso!')
+
+
+print('Controle de Estoque - Isabelle Pequeno Brito Araújo')
+
+listaPecas = []
+codigo = 0
+
+while True:
+    try:
+        print('1. Cadastrar Peça')
+        print('2. Consultar Peça')
+        print('3. Remover Peça')
+        print('4. Sair')
+        cod = int(input('Digite a opção Desejada: '))
+        if cod == 1:
+            codigo += 1
+            cadastrarPeca(codigo)
+            print('Peça cadastrada com sucesso!')
+            continue
+        elif cod == 2:
+            consultaPeca()
+            continue
+        elif cod == 3:
+            print(removerPeca())
+            continue
+        elif cod == 4:
+            break
+    except ValueError:
+        print('Opção inválida. Selecione uma das opções abaixo')
+        continue
+
+
